@@ -6,25 +6,25 @@
 </head>
 <body>
 <div align="left">
-    <h3> Редактирование пользователя</h3>
+    <h3>Изменение данных</h3>
     <form th:method="patch" th:action="@{/admin/{id}(id=${editUser.getId()})}" th:object="${editUser}">
-        <label for="name">Name: </label>
+        <label for="name">Имя: </label>
         <input type="text" th:field="*{name}" id="name"/>
         <br>
-        <label for="lastname">LastName: </label>
+        <label for="lastname">Фамилия: </label>
         <input type="text" th:field="*{lastname}" id="lastname"/>
         <br>
-        <label for="age">Age: </label>
+        <label for="age">Возраст: </label>
         <input type="text" th:field="*{age}" id="age"/>
         <br>
-        <label for="email">Email: </label>
+        <label for="email">Адрес электронной почты: </label>
         <input type="text" th:field="*{email}" id="email"/>
         <br>
-        <label for="password">Password: </label>
+        <label for="password">Пароль: </label>
         <input type="text" th:field="*{password}" id="password"/>
 
         <p>
-            <label>Roles:
+            <label>Роль:
                 <input type="checkbox" name="roleList"
                        th:each="role : ${roleList}"
                        th:text="${role.getNoPrefix()}"

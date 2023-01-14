@@ -8,19 +8,19 @@
 
 <div>
 
-    <table border="1">
+    <table border="1" cellspacing="0">
         <caption>
             <h1>Список пользователей</h1>
         </caption>
         <tr>
 
             <th>Id</th>
-            <th>Name</th>
-            <th>Lastname</th>
-            <th>Age</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Roles</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+            <th>Почта</th>
+            <th>Пароль</th>
+            <th>Роль</th>
 
             <th>Действия</th>
         </tr>
@@ -39,9 +39,8 @@
                 <a th:href="@{/admin/editUser/{id}(id=${user.getId()})}">
                     <input type="submit" value="Изменить пользователя"/>
                 </a>
-                <br>
                 <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.getId()})}">
-                    <input type="submit" value="Удвлить пользователя"/>
+                    <input type="submit" value="Удалить пользователя"/>
                 </form>
             </td>
         </tr>
@@ -51,7 +50,6 @@
     <h4><a href="/admin/newUserAdmin">Добавить пользователя</a></h4>
 
 
-    <hr/>
     <a href="/user">Личная страница</a>
 
     <br/>
