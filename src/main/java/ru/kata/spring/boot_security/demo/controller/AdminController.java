@@ -70,7 +70,7 @@ public class AdminController {
 
     @GetMapping("/editUser/{id}")
     public String editUser(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("editUser", userService.getUser(id));
+        model.addAttribute("editUser", userService.getUserAndRole(id));
         model.addAttribute("roleList",roleService.getList());
         return "editAdmin";
     }

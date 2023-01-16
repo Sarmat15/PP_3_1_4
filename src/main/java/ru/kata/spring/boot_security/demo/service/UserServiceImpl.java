@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUser(Integer id) {
+    public User getUserAndRole(Integer id) {
         return userDAO.getUser(id);
     }
 
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = (User) userDAO.getUser(username);
+        User user = (User) userDAO.getUserAndRole(username);
         user.getRoles().size();
         return user;
     }

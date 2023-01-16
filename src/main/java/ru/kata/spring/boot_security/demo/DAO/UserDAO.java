@@ -19,5 +19,5 @@ public interface UserDAO {
 
     void editUser(User user);
 
-    UserDetails getUser(String username);
+    UserDetails getUserAndRole(String username);
 }

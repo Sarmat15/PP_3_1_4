@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 
     List<User> getList();
 
-    User getUser(Integer id);
+    User getUserAndRole(Integer id);
 
     void deleteUser(Integer id);
 
