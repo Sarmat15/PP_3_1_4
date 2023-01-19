@@ -16,50 +16,32 @@ import java.util.Set;
 public class Init {
 
 
-    private UserService userService;
-    private RoleService roleService;
 
+
+    private final UserService userService;
+    private final RoleService roleService;
 
     @Autowired
     public Init(UserService userService, RoleService roleService) {
-
         this.userService = userService;
         this.roleService = roleService;
     }
 
     @PostConstruct
-    public void createTable() {
-        if (roleService.getList().isEmpty()) {
-            Role admin = new Role(1, "ROLE_ADMIN");
-            Role user = new Role(2, "ROLE_USER");
-            roleService.add(admin);
-            roleService.add(user);
+    public void init() {
+        Role role1 = new Role("ROLE_ADMIN");
+        Role role2 = new Role("ROLE_USER");
 
-            Set<Role> setRole1 = new HashSet<>();
-            setRole1.add(admin);
-            Set<Role> setRole2 = new HashSet<>();
-            setRole2.add(user);
-            Set<Role> setRole3 = new HashSet<>();
-            setRole3.add(admin);
-            setRole3.add(user);
+        roleService.add(role1);
+        roleService.add(role2);
 
-            User adminUser1 = new User("adminUser", "adminUser", 10, "adminUser@gmail.com",
-                    "adminuser", setRole3);
+        User user1 = new User("admin", "admin", 26, "admin", "admin",
+                new HashSet<>(Set.of(role1)));
 
-            User user1 = new User("user", "user", 15, "user@gmail.com",
-                    "user", setRole2);
+        User user2 = new User("user", "user", 28, "user", "user",
+                new HashSet<>(Set.of(role2)));
 
-            User admin1 = new User("admin", "admin", 20, "admin1@gmail.com",
-                    "admin", setRole1);
-
-            userService.add(admin1);
-            userService.add(user1);
-            userService.add(adminUser1);
-
-            System.out.println(
-                    "login: admin      password: admin \n" +
-                            "login: user       password: user \n" +
-                            "login: adminUser  password: adminUser");
-        }
+        userService.add(user1);
+        userService.add(user2);
     }
 }

@@ -10,8 +10,9 @@ import ru.kata.spring.boot_security.demo.DAO.UserDAO;
 
 import ru.kata.spring.boot_security.demo.model.User;
 
-
 import java.util.List;
+
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,9 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void add(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDAO.add(user);
+    public User getUserAndRole(Integer id) {
+        return userDAO.getUser(id);
     }
 
     @Override
@@ -40,8 +40,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User getUserAndRole(Integer id) {
-        return userDAO.getUser(id);
+    public boolean add(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userDAO.add(user);
+        return true;
     }
 
     @Override
@@ -54,14 +56,24 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void editUser(User user) {
+        User userBase = getUserAndRole(user.getId());
+        if (!userBase.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userDAO.editUser(user);
     }
 
+    public User findByEmail(String userName) {
+        return userDAO.findByEmail(userName);
+    }
+
     @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = (User) userDAO.getUserAndRole(username);
-        user.getRoles().size();
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userDAO.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
         return user;
     }
 }

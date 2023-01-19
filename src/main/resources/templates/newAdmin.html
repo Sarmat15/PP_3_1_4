@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Создаем нового пользователя</title>
@@ -8,7 +8,7 @@
 <div align="left">
     <h3> Создаем нового пользователя</h3>
     <form th:method="POST" th:action="@{/admin/newUserAdmin}" th:object="${newUser}">
-        <label for="name">Имя\Логин: </label>
+        <label for="name">Имя: </label>
         <input type="text" th:field="*{name}" id="name" placeholder="Name">
         <br>
         <br>

@@ -12,7 +12,7 @@ import java.util.List;
 public class RoleDAOImpl implements RoleDAO, Converter<String, Role> {
 
 
-    @PersistenceContext                //@Autowired плохо, но работает
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Override
@@ -20,6 +20,26 @@ public class RoleDAOImpl implements RoleDAO, Converter<String, Role> {
         entityManager.persist(role);
         return true;
     }
+
+    public Role findByName(String name) {
+        return entityManager.createQuery("select xxx FROM Role xxx WHERe xxx.role = :id", Role.class)
+                .setParameter("id", name)
+                .getResultList().stream().findAny().orElse(null);
+    }
+
+    public List<Role> listByName(List<String> name) {
+        return entityManager.createQuery("select xxx FROM Role xxx WHERe xxx.role in (:id)", Role.class)
+                .setParameter("id", name)
+                .getResultList();
+    }
+
+    @Override
+    public Role convert(String id) {
+        Role role = new Role();
+        role.setId(Integer.valueOf(id));
+        return role;
+    }
+
     @Override
     public List<Role> getList() {
         return entityManager.createQuery("select s from Role s", Role.class).getResultList();
@@ -38,24 +58,6 @@ public class RoleDAOImpl implements RoleDAO, Converter<String, Role> {
     @Override
     public void editRole(Role role) {
         entityManager.merge(role);
-    }
-    @Override
-    public List<Role> listByName(List<String> name) {
-        return  entityManager.createQuery("select u FROM Role u WHERe u.name in (:id)", Role.class)
-                .setParameter("id", name)
-                .getResultList();
-    }
-    @Override
-    public Role findByName(String name) {
-        return entityManager.createQuery("select u FROM Role u WHERe u.name = :id", Role.class)
-                .setParameter("id", name)
-                .getResultList().stream().findAny().orElse(null);
-    }
-    @Override
-    public Role convert(String id) {
-        Role role = new Role();
-        role.setId(Integer.valueOf(id));
-        return role;
     }
 }
 

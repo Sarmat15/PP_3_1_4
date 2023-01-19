@@ -8,6 +8,9 @@ public interface RoleDAO {
 
     boolean add(Role user);
 
+    List<Role> listByName(List<String> name);
+
+    Role findByName(String name);
 
     Role convert(String id);
 
@@ -20,7 +23,5 @@ public interface RoleDAO {
 
     void editRole(Role role);
 
-    List<Role> listByName(List<String> name);
 
-    Role findByName(String name);
 }

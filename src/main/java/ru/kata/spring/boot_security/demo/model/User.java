@@ -17,10 +17,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "name", unique = true)
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
     @Column(name = "age")
     private Integer age;
     @Column(name = "email")
@@ -30,7 +30,7 @@ public class User implements UserDetails {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "user_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
 
@@ -39,19 +39,19 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String lastname, Integer age, String email, String password, Set<Role> roles) {
-        this.name = name;
-        this.lastname = lastname;
+    public User(String firstName, String lastName, Integer age, String email, String password, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public User(String name, String lastname, Integer age, String email, String password) {
+    public User(String firstName, String lastName, Integer age, String email, String password) {
 
-        this.name = name;
-        this.lastname = lastname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -69,7 +69,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return name;
+        return firstName;
     }
 
     @Override
@@ -101,19 +101,19 @@ public class User implements UserDetails {
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public Integer getAge() {
@@ -151,11 +151,11 @@ public class User implements UserDetails {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && name.equals(user.name) && lastname.equals(user.lastname) && age.equals(user.age) && email.equals(user.email) && password.equals(user.password) && roles.equals(user.roles);
+        return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && age.equals(user.age) && email.equals(user.email) && password.equals(user.password) && roles.equals(user.roles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, lastname, age, email, password, roles);
+        return Objects.hash(id, firstName, lastName, age, email, password, roles);
     }
 }

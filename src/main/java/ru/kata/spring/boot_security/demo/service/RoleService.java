@@ -17,6 +17,5 @@ public interface RoleService {
 
     void editRole(Role role);
 
-
     List<Role> listByRole(List<String> name);
 }
