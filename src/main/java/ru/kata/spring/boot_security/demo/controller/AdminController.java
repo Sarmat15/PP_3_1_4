@@ -43,7 +43,7 @@ public class AdminController {
     @GetMapping("/{id}")
     public String getUser(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("user", userService.getUserAndRole(id));
-        return "getUser";
+        return "user";
     }
 
     @GetMapping("/newUserAdmin")
@@ -69,8 +69,8 @@ public class AdminController {
 
     @GetMapping("/editUser/{id}")
     public String editUser(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("editUser", userService.getUserAndRole(id));
-        model.addAttribute("roleList",roleService.getList());
+        model.addAttribute("user", userService.getUserAndRole(id));
+        model.addAttribute("roles",roleService.getList());
         return "editAdmin";
     }
 

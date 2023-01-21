@@ -77,7 +77,7 @@
                                         </button>
                                         <div class="modal fade text-center" th:attrappend="id=${user.id}" id="edit"
                                              tabindex="-1" role="dialog" aria-labelledby="editTitle" aria-hidden="true">
-                                            <form th:action="@{admin}" method="post">
+                                            <form th:action="@{/admin}" method="patch">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content ">
                                                         <div class="modal-header">
@@ -234,7 +234,7 @@
                                                                 data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <form th:action="@{admin/{id}(id=${user.id})}"
+                                                        <form th:action="@{/admin/{id}(id=${user.id})}"
                                                               th:method="delete">
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form>

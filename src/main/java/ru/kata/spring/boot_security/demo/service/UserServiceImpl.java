@@ -13,7 +13,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import java.util.List;
 
 
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -63,6 +62,7 @@ public class UserServiceImpl implements UserService {
         userDAO.editUser(user);
     }
 
+    @Override
     public User findByEmail(String userName) {
         return userDAO.findByEmail(userName);
     }
