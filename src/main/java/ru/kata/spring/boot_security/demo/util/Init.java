@@ -16,8 +16,6 @@ import java.util.Set;
 public class Init {
 
 
-
-
     private final UserService userService;
     private final RoleService roleService;
 

@@ -74,7 +74,7 @@ public class AdminController {
         return "editAdmin";
     }
 
-    @PatchMapping("/{id}")
+    @PostMapping("/{id}")
     public String userSaveEdit(@PathVariable("id") Integer id, @ModelAttribute("user") User user) {
         userService.editUser(user);
         return "redirect:/admin";

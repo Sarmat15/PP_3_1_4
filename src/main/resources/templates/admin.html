@@ -77,7 +77,7 @@
                                         </button>
                                         <div class="modal fade text-center" th:attrappend="id=${user.id}" id="edit"
                                              tabindex="-1" role="dialog" aria-labelledby="editTitle" aria-hidden="true">
-                                            <form th:action="@{/admin}" method="patch">
+                                            <form th:action="@{/admin/{id}(id=${user.id})}" method="post">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content ">
                                                         <div class="modal-header">
@@ -97,7 +97,7 @@
                                                                 <label class="font-weight-bold"
                                                                        for="firstNameEdit">First name</label>
                                                                 <input id="firstNameEdit" class="form-control"
-                                                                       th:name="firstName"
+                                                                       th:name="name"
                                                                        th:value="${user.name}"
                                                                        placeholder="firstName">
                                                             </div>
@@ -105,7 +105,7 @@
                                                                 <label class="font-weight-bold"
                                                                        for="lastNameEdit">Last name</label>
                                                                 <input id="lastNameEdit" class="form-control"
-                                                                       th:name="lastName"
+                                                                       th:name="lastname"
                                                                        th:value="${user.lastname}"
                                                                        placeholder="lastName">
                                                             </div>
@@ -234,7 +234,7 @@
                                                                 data-dismiss="modal">
                                                             Close
                                                         </button>
-                                                        <form th:action="@{/admin/{id}(id=${user.id})}"
+                                                        <form th:action="@{/admin/delete/{id}(id=${user.id})}"
                                                               th:method="delete">
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form>
@@ -253,7 +253,7 @@
                                     <h5 class="pl-3 pt-2 pb-2">Add new user</h5>
                                 </div>
                                 <div class="col-12 pl-3 pr-3 pt-3 pb-3 border">
-                                    <form th:action="@{/admin}" th:object="${user}" method="post">
+                                    <form th:action="@{/admin/newUserAdmin}" th:object="${user}" method="post">
                                         <div class="text-center col-3 offset-3 col-md-2 offset-md-3">
                                             <div class="form-group text-center">
                                                 <label class="font-weight-bold" for="firstNameNew">First name</label>
